@@ -197,6 +197,31 @@ def mostrar_graficos_resumen(datos_locales, clave_sufijo=""):
 
     st.divider()
 
+    # 3. Top Vehículos
+    st.subheader("Top Vehículos")
+    num_vehiculos = st.slider("Número de vehículos a mostrar:", min_value=5, max_value=20, value=5, key=f"slider_top_{clave_sufijo}")
+    top_vehiculos = mostrar_top_vehiculos(datos_locales, top_n=num_vehiculos)
+    if top_vehiculos:
+        
+        col_top1, col_top2, col_top3 = st.columns(3)
+        
+        with col_top1:
+            if "consumo" in top_vehiculos:
+                st.markdown("**Mayor Consumo**")
+                st.dataframe(top_vehiculos["consumo"], hide_index=True, use_container_width=True)
+        
+        with col_top2:
+            if "recorrido" in top_vehiculos:
+                st.markdown("**Mayor Recorrido**")
+                st.dataframe(top_vehiculos["recorrido"], hide_index=True, use_container_width=True)
+        
+        with col_top3:
+            if "repostado" in top_vehiculos:
+                st.markdown("**Mayor Repostado**")
+                st.dataframe(top_vehiculos["repostado"], hide_index=True, use_container_width=True)
+
+    st.divider()
+
 with tab_general:
     if datos_activos is not None:
         st.subheader("Vista General de la Flota")
