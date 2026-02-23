@@ -1,5 +1,6 @@
 import streamlit as st
 import pandas as pd
+from streamlit_folium import st_folium
 
 if "datos_filtrados" not in st.session_state:
     st.session_state.datos_filtrados = None
@@ -12,7 +13,8 @@ from modulos.graficos import (
     grafico_tarta_distribucion,
     grafico_dia_semana,
     grafico_lineal_consumo,
-    grafico_comparativo_modelo
+    grafico_comparativo_modelo,
+    mostrar_top_vehiculos
 )
 from modulos.utilidades import set_star_background
 
@@ -305,7 +307,7 @@ with tab_vehiculo:
                 st.subheader("Mapa de Repostajes")
                 if "latitud" in datos_vehiculo.columns:
                      f_map = mapa_repostajes(datos_vehiculo, vehiculo_sel)
-                     if f_map: st.plotly_chart(f_map, use_container_width=True, key="v_map")
+                     if f_map: st_folium(f_map, use_container_width=True, key="v_map")
                 
             else:
                 st.info("Selecciona un vehículo.")
