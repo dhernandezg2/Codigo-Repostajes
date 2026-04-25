@@ -80,7 +80,7 @@ def grafico_barras_temporal(df, col_fecha, col_metrica, periodo='M', titulo="Evo
     elif periodo == 'M':
         frecuencia = 'MS'
     else:
-        frecuencia = 'Y' 
+        frecuencia = 'YE' 
     
     datos_agrupados = df.groupby(pd.Grouper(key=col_fecha, freq=frecuencia))[col_metrica].sum().reset_index()
 
