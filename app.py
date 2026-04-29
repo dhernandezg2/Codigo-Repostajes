@@ -114,7 +114,7 @@ def mostrar_filtros_laterales(df):
     # Renderiza los widgets con las opciones completas
     tipos_vehiculo = st.multiselect("Tipo de vehículo", options=opciones_tipo_vehiculo, key="filter_vehiculo")
     tipos_combustible = st.multiselect("Tipo de combustible", options=opciones_tipo_combustible, key="filter_combustible")
-    provincia = st.multiselect("Provincia", options=opciones_provincia, key="filter_provincia")
+    provincia = st.multiselect("Localidad", options=opciones_provincia, key="filter_provincia")
     
     # Filtros de rangos para métricas numéricas
     metricas_rango = ["repostado", "distancia", "consumo"]
@@ -162,7 +162,7 @@ datos_filtrados = st.session_state.datos_filtrados
 datos_activos = datos_filtrados if datos_filtrados is not None else df
 
 # Crea las distintas pestañas
-tab_general, tab_provincia, tab_vehiculo = st.tabs(["Vista General", "Vista por Provincia", "Detalle Vehículo"])
+tab_general, tab_provincia, tab_vehiculo = st.tabs(["Vista General", "Vista por Localidad", "Detalle Vehículo"])
 
 # Función para mostrar los gráficos repetidos en General y Provincia
 def mostrar_graficos_resumen(datos_locales, clave_sufijo=""):
@@ -233,17 +233,17 @@ with tab_general:
 
 with tab_provincia:
     if datos_activos is not None:
-        st.subheader("Vista por Provincia")
+        st.subheader("Vista por Localidad")
         
         if "provincia" in datos_activos.columns:
             lugares = sorted(datos_activos["provincia"].astype(str).unique())
-            lugar_sel = st.selectbox("Selecciona Provincia:", lugares, index=0)
+            lugar_sel = st.selectbox("Selecciona Localidad:", lugares, index=0)
             
             if lugar_sel:
                 datos_prov = datos_activos[datos_activos["provincia"] == lugar_sel]
                 mostrar_graficos_resumen(datos_prov, "provincia")
         else:
-            st.warning("No se encontró columna de Provincia.")
+            st.warning("No se encontró columna de Localidad.")
     else:
         st.info("Carga un archivo.")
 
