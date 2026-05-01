@@ -315,8 +315,9 @@ def grafico_comparativo_modelo(df_total, vehiculo_sel, col_fecha, col_metrica, c
         fig.add_trace(go.Scatter(
             x=datos_modelo_agrupados[col_fecha],
             y=datos_modelo_agrupados[col_metrica],
-            mode='lines',
-            line=dict(color='rgba(255, 255, 255, 0.5)', width=2, dash='dash'), 
+            mode='lines+markers',
+            line=dict(color='#F5A623', width=3, dash='dash'),
+            marker=dict(size=7, color='#F5A623', symbol='circle', line=dict(width=1.5, color='#1a1a1a')),
             name=f"Media {nombre_modelo}",
             hovertemplate = 'Media: %{y:.1f}<extra></extra>'
         ))

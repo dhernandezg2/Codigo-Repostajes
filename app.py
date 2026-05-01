@@ -262,7 +262,7 @@ with tab_vehiculo:
                 datos_vehiculo = datos_base[datos_base["vehiculo"].astype(str) == str(vehiculo_sel)]
                 
                 # Gráficos mensuales, semanales y anuales
-                periodo = st.radio("Agrupación temporal:", ["Mensual", "Semanal", "Anual"], horizontal=True)
+                periodo = st.radio("Agrupación temporal:", ["Semanal", "Mensual", "Anual"], horizontal=True)
                 if periodo == "Mensual":
                     codigo_periodo = "M"
                 elif periodo == "Semanal":
